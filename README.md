@@ -46,7 +46,7 @@ Deep links work for review, for example `#series=engine:1&sel=naive:1`.
 - `src/generate.js`: seeded synthetic dataset (fictional brand, engines, topics, sources, planted events)
 - `src/core.js`: aggregation, noise model, calibration, CUSUM detector, change-point MLE, exact Level-1 split, ridge logistic (IRLS), exact Shapley, counterfactual attribution, action items, agent payload
 - `test/core.test.js`: 10 tests (Shapley axioms, logistic recovery, exact split identity, outage attributed to mix, detection plus change-point accuracy, false-trigger budget on event-free data, planted causes recovered with CIs excluding zero, idempotency key stability)
-- `index.html`, `app.js`, `styles.css`: the concept screen (Chart.js from a CDN, no build step)
+- `index.html`, `app.js`, `styles.css`: the concept screen, built as an Agent page in Profound's light app shell. The feature is a new "Profound data" run trigger in the Agent's settings panel, and the chat shows a triggered run with the attribution. Uses Chart.js, Lucide and Inter from CDNs, with no build step.
 
 ## Honest limitations
 

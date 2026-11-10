@@ -1,103 +1,82 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calibrated visibility-shift trigger · concept demo</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<title>Visibility Shift Responder · Agents</title>
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <link rel="stylesheet" href="styles.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
-<div class="app">
-  <aside class="rail" aria-label="Navigation (decorative)">
-    <div class="ws-tile" title="Larkspur (demo workspace)">L</div>
-    <div class="rail-icons">
-      <span class="ri" title="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-      <span class="ri" title="Inbox"><svg viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span>
-      <span class="sep"></span>
-      <span class="ri" title="Analytics"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v2"/><path d="M12 11v6"/><path d="M17 7v10"/></svg></span>
-      <span class="ri on" title="Agents"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/><path d="M9 13v2"/><path d="M15 13v2"/></svg></span>
-      <span class="ri" title="Citations"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-      <span class="ri" title="Prompts"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      <span class="ri" title="Documents"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
-      <span class="sep"></span>
-      <span class="ri" title="History"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg></span>
+<div class="shell">
+  <!-- Sidebar: same structure, order and labels as the production app (Workspace tab) -->
+  <aside class="sidebar">
+    <div class="sb-top">
+      <button class="org"><span class="org-tile">L</span><span class="org-name">Larkspur</span><i data-lucide="chevrons-up-down" class="ic12"></i></button>
+      <div class="sb-top-icons"><button class="icon-btn"><i data-lucide="search"></i></button><button class="icon-btn dot"><i data-lucide="inbox"></i></button></div>
     </div>
-    <div class="rail-foot"><span class="ri" title="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span></div>
+    <div class="seg-switch"><button class="on">Workspace</button><button>Analytics</button></div>
+    <nav class="nav">
+      <a><i data-lucide="fast-forward"></i>AI Marketer</a>
+      <a><i data-lucide="archive"></i>Projects</a>
+      <a><i data-lucide="loader"></i>Context Manager</a>
+      <a class="on"><i data-lucide="bot"></i>Agents</a>
+      <a><i data-lucide="sheet"></i>Sheets</a>
+      <a><i data-lucide="file-text"></i>Documents</a>
+    </nav>
+    <div class="recents-h"><span>Recents <i data-lucide="chevron-down" class="ic12"></i></span><i data-lucide="sliders-horizontal" class="ic14"></i></div>
+    <nav class="nav recents">
+      <a class="on"><span class="ag-ico purple"><i data-lucide="activity"></i></span>Visibility Shift Responder</a>
+      <a><span class="ag-ico red"><i data-lucide="megaphone"></i></span>Competitor Pulse Check</a>
+      <a><span class="ag-ico green"><i data-lucide="megaphone"></i></span>Content Audit</a>
+      <a><span class="ag-ico violet"><i data-lucide="megaphone"></i></span>Weekly AI Visibility Digest</a>
+      <a><span class="ag-ico blue"><i data-lucide="megaphone"></i></span>Content Blog Audit</a>
+      <a class="muted-link"><i data-lucide="ellipsis"></i>Show more</a>
+    </nav>
+    <div class="demo-foot">Unofficial concept demo by Mohith Gajjela. Not affiliated with Profound. Synthetic data.</div>
+    <div class="sb-bottom"><button class="icon-btn dot"><i data-lucide="circle-help"></i></button><button class="icon-btn"><i data-lucide="panel-left"></i></button></div>
   </aside>
 
-  <div class="main">
-    <header class="topbar">
+  <div class="page">
+    <header class="hdr">
       <div class="crumbs">
-        <span class="muted">Agents</span>
-        <svg class="chev" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-        <span class="agent-ico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-        <span class="crumb-cur">Visibility shift trigger</span>
-        <span class="tag">Concept</span>
+        <a class="crumb">Agents</a><i data-lucide="chevron-right" class="ic14 sep"></i>
+        <span class="ag-ico purple sm"><i data-lucide="activity"></i></span><span class="crumb cur">Visibility Shift Responder</span>
       </div>
-      <div class="top-actions">
-        <a class="btn ghost" href="#log"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>Run history</a>
-        <a class="btn" href="#inspector"><svg viewBox="0 0 24 24"><path d="m6 3 14 9-14 9z"/></svg>Latest run</a>
+      <div class="hdr-actions">
+        <button class="ghost"><i data-lucide="library"></i>Artifacts</button>
+        <button class="ghost" id="runHistoryBtn"><i data-lucide="history"></i>Run history</button>
+        <button class="outline"><i data-lucide="play"></i>New run</button>
+        <button class="ghost"><i data-lucide="upload"></i>Share</button>
+        <button class="icon-btn"><i data-lucide="ellipsis"></i></button>
       </div>
     </header>
 
-    <div class="content">
-      <div class="page-head">
-        <div class="ws-switch">Larkspur <svg viewBox="0 0 24 24"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg></div>
-        <p class="sub">Run an Agent only when a visibility move is larger than answer-engine sampling noise, and hand it a ranked, confidence-bounded explanation of what changed.</p>
-      </div>
-
-      <nav class="utabs">
-        <a class="on" href="#overview">Trigger</a><a href="#log">Trigger log</a><a href="#inspector">Attribution</a>
-        <span class="utabs-right"><button class="link" id="export"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg><span id="exportLabel">Export answers</span></button></span>
-      </nav>
-
-      <div class="filters" id="overview">
-        <span class="dd static"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="v">Last 90 Days</span></span>
-        <label class="dd"><span class="k">Budget</span><select id="alpha"><option value="0.05">5% false triggers / qtr</option><option value="0.1" selected>10% false triggers / qtr</option><option value="0.2">20% false triggers / qtr</option></select><svg class="caret" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></label>
-        <span class="vs">vs.</span>
-        <label class="dd"><span class="k">Rule</span><select id="thr"><option value="0.03">Changes by 3%</option><option value="0.05" selected>Changes by 5%</option><option value="0.1">Changes by 10%</option></select><svg class="caret" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></label>
-        <span class="divider"></span>
-        <label class="chip"><svg viewBox="0 0 24 24"><path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/></svg>Seed<input id="seed" type="number" value="7" min="1" max="9999" /></label>
-        <button class="chip" id="regen"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Regenerate</button>
-        <label class="chip"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>Attribution<select id="through"><option value="0" selected>at detection</option><option value="7">+7 days</option></select></label>
-      </div>
-
-      <section class="kpis" id="kpis"></section>
-
-      <section class="split card">
-        <div class="pane-l">
-          <div class="pane-h">
-            <div>
-              <div class="dotted" id="chartTitle">Visibility Score</div>
-              <div class="big" id="bigNum"></div>
+    <div class="body">
+      <!-- Chat: the triggered run, rendered like an Agent run in Profound -->
+      <section class="chat">
+        <div class="chat-scroll" id="chat"></div>
+        <div class="composer-wrap">
+          <div class="composer">
+            <div class="composer-agent"><span class="ag-ico purple xs"><i data-lucide="activity"></i></span>Visibility Shift Responder<button class="outline xs"><i data-lucide="play"></i>New run</button></div>
+            <div class="composer-in">Ask a follow up...</div>
+            <div class="composer-row">
+              <button class="round"><i data-lucide="plus"></i></button>
+              <button class="pill">Auto <span class="muted">Medium</span><i data-lucide="chevron-down" class="ic14"></i></button>
+              <span class="grow"></span>
+              <i data-lucide="mic" class="ic16 muted"></i>
+              <button class="send"><i data-lucide="arrow-up"></i></button>
             </div>
-            <div class="seg" id="viewSeg"></div>
           </div>
-          <div class="chart-wrap"><canvas id="visChart"></canvas></div>
-          <div class="chart-foot" id="chartFoot"></div>
-          <div class="sub-h"><span class="dotted">Detector statistic</span><span class="muted" id="cusumSub"></span></div>
-          <div class="chart-wrap short"><canvas id="cusumChart"></canvas></div>
-        </div>
-        <div class="pane-r">
-          <div class="dotted">Monitored series</div>
-          <div class="muted small" style="margin-top:4px">Last 7 days vs previous 7. Click a series to chart it.</div>
-          <div class="rank" id="rank"></div>
-          <div class="triggers" id="triggers"></div>
+          <div class="disclaimer">AI can make mistakes. Please double-check responses.</div>
         </div>
       </section>
 
-      <section class="card" id="log">
-        <div class="card-h"><div><div class="h3">Trigger log</div><div class="muted small">Click a row to see the attribution the Agent would receive</div></div></div>
-        <div class="tbl" id="logTable"></div>
-      </section>
-
-      <section class="card" id="inspector"></section>
-
-      <footer>Unofficial concept demo by Mohith Gajjela. Not affiliated with Profound. Synthetic data (fictional brand and sources, seeded generator in <code>src/generate.js</code>). Every number on this page is computed in your browser from that data.</footer>
+      <!-- Agent settings panel -->
+      <aside class="settings" id="settings"></aside>
     </div>
   </div>
 </div>

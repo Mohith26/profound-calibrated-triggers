@@ -1,0 +1,41 @@
+[
+  {
+    "id": "E1",
+    "kind": "coverage",
+    "label": "AI Overviews run failures (collector outage)",
+    "engine": 2,
+    "start": 40,
+    "end": 43,
+    "failure": 0.9
+  },
+  {
+    "id": "E2",
+    "kind": "citation_loss",
+    "direction": "down",
+    "label": "Perplexity drops stackreviews.com on Pricing + Small-business",
+    "engine": 1,
+    "topics": [
+      0,
+      2
+    ],
+    "start": 55,
+    "domain": 1,
+    "to": 0.05,
+    "alsoDomain": 4,
+    "alsoAdd": 0.45
+  },
+  {
+    "id": "E3",
+    "kind": "citation_gain",
+    "direction": "up",
+    "label": "ChatGPT starts citing larkspur.io docs on Integrations + Migration",
+    "engine": 0,
+    "topics": [
+      1,
+      4
+    ],
+    "start": 72,
+    "domain": 0,
+    "to": 0.75
+  }
+]

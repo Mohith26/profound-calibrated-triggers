@@ -1,0 +1,9 @@
+{
+  "name": "profound-calibrated-triggers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Unofficial concept demo: noise-calibrated visibility-shift triggers with counterfactual attribution.",
+  "scripts": { "test": "node --test test/*.test.js", "data": "node data/generate.js" },
+  "license": "MIT"
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calibrated visibility-shift triggers · concept demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="ws"><span class="ws-dot">L</span><div><div class="ws-name">Larkspur</div><div class="ws-sub">Demo workspace</div></div></div>
+    <nav>
+      <div class="nav-h">Analytics</div>
+      <a>Answer Engine Insights</a><a>Citations</a><a>Agent Analytics</a>
+      <div class="nav-h">Automate</div>
+      <a>Agents</a><a class="on">Triggers</a><a>Runs</a>
+    </nav>
+    <div class="rail-foot">Concept screen</div>
+  </aside>
+
+  <main>
+    <header class="top">
+      <div>
+        <div class="crumb">Agents <span>/</span> Triggers <span>/</span> Visibility shift</div>
+        <h1>Calibrated visibility-shift trigger</h1>
+        <p class="sub">Runs an Agent only when a move is larger than answer-engine sampling noise, and hands it a ranked, confidence-bounded explanation of what changed.</p>
+      </div>
+      <div class="controls">
+        <label>False-trigger budget
+          <select id="alpha"><option value="0.05">5% / quarter</option><option value="0.1" selected>10% / quarter</option><option value="0.2">20% / quarter</option></select>
+        </label>
+        <label>Compare with "changes by"
+          <select id="thr"><option value="0.03">3%</option><option value="0.05" selected>5%</option><option value="0.1">10%</option></select>
+        </label>
+        <label>Attribution data
+          <select id="through"><option value="0" selected>At detection</option><option value="7">Detection + 7 days</option></select>
+        </label>
+        <label>Seed
+          <span class="seedrow"><input id="seed" type="number" value="7" min="1" max="9999" /><button id="regen">Regenerate</button></span>
+        </label>
+      </div>
+    </header>
+
+    <section class="kpis" id="kpis"></section>
+
+    <section class="grid">
+      <div class="card chart-card">
+        <div class="card-h">
+          <div><div class="card-t">Visibility, daily</div><div class="card-s" id="chartSub"></div></div>
+          <div class="tabs" id="seriesTabs"></div>
+        </div>
+        <div class="legend" id="legend"></div>
+        <div class="chart-wrap"><canvas id="visChart"></canvas></div>
+        <div class="card-t small">Detector statistic (two-sided CUSUM, z-units) <span class="muted" id="cusumSub"></span></div>
+        <div class="chart-wrap short"><canvas id="cusumChart"></canvas></div>
+      </div>
+      <div class="card list-card">
+        <div class="card-h"><div><div class="card-t">Trigger log</div><div class="card-s">Click any row to see the attribution the Agent would receive</div></div></div>
+        <div class="log" id="log"></div>
+      </div>
+    </section>
+
+    <section class="card inspector" id="inspector"></section>
+
+    <footer>Unofficial concept demo by Mohith Gajjela. Not affiliated with Profound. Synthetic data (fictional brand and sources, seeded generator in <code>src/generate.js</code>). Every number on this page is computed in your browser from that data.</footer>
+  </main>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
